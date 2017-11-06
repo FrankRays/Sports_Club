@@ -1,0 +1,13 @@
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Client.deps.json
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Client.runtimeconfig.json
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Client.runtimeconfig.dev.json
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Client.dll
+C:\Users\user\source\repos\Sport.API\Sport.Client\obj\Debug\netcoreapp1.1\Sport.Client.csprojResolveAssemblyReference.cache
+C:\Users\user\source\repos\Sport.API\Sport.Client\obj\Debug\netcoreapp1.1\Sport.Client.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Sport.API\Sport.Client\obj\Debug\netcoreapp1.1\Sport.Client.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Sport.API\Sport.Client\obj\Debug\netcoreapp1.1\Sport.Client.AssemblyInfo.cs
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Client.pdb
+C:\Users\user\source\repos\Sport.API\Sport.Client\obj\Debug\netcoreapp1.1\Sport.Client.dll
+C:\Users\user\source\repos\Sport.API\Sport.Client\obj\Debug\netcoreapp1.1\Sport.Client.pdb
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Model.dll
+C:\Users\user\source\repos\Sport.API\Sport.Client\bin\Debug\netcoreapp1.1\Sport.Model.pdb
