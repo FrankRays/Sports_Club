@@ -1,0 +1,29 @@
+﻿@model Sport.Client.ViewModels.SportIndexViewModel
+
+<div class="bottomMarginDefault">
+</div>
+
+<div class="container">
+    <div class="row">
+        <table class="table" style="margin-top:100px; margin-right:40px;">
+            <tr>
+                <th>Activity</th>
+                <th>Beginning</th>
+                <th>Ending</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Activities)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Beginning</td>
+                    <td>@item.Ending</td>
+                    <td></td>
+                    <td><a asp-action="EditActivity" asp-controller="Activity" asp-route-id="@item.Id">Edit</a></td>
+                    <td><a asp-action="DeleteActivity" asp-controller="Activity" asp-route-id="@item.Id">Delete</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

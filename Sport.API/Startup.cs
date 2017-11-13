@@ -59,12 +59,15 @@ namespace Sport.API
                 cfg.CreateMap<Model.ActivityForCreationAndUpdate, Entities.Activity>();
             });
 
-            app.UseMvc();
-
-            app.Run(async (context) =>
+            app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                await context.Response.WriteAsync("Hello World!");
+                Authority = "https://localhost:44348/",
+                RequireHttpsMetadata = true,
+
+                ApiName = "sportapi"
             });
+
+            app.UseMvc();
         }
     }
 }

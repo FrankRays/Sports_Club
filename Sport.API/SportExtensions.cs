@@ -21,7 +21,8 @@ namespace Sport.API
                 {
                     Name = "Yoga",
                     Beginning = new DateTime(2017, 12, 3, 15, 0, 0),
-                    Ending = new DateTime(2017, 12, 3, 16, 0, 0)
+                    Ending = new DateTime(2017, 12, 3, 16, 0, 0),
+                    TrainerId = "1"
                 }
             };
 

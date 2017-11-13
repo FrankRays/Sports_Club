@@ -14,5 +14,6 @@ namespace Sport.API.Entities
             Database.Migrate();
         }
         public DbSet<Entities.Activity> Activities { get; set; }
+        public DbSet<Entities.ClientActivity> ClientActivities { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sport.API.Entities;
 using Sport.API.Services;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace Sport.API.Controllers
 {
     [Route("api/activities")]
+    [Authorize]
     public class ActivitiesController : Controller
     {
         private ISportRepository _sportRepository;
@@ -24,6 +26,17 @@ namespace Sport.API.Controllers
         public IActionResult GetActivities()
         {
             var activityEntities = _sportRepository.GetActivities();
+            var results = Mapper.Map<IEnumerable<Model.Activity>>(activityEntities);
+
+            return Ok(results);
+        }
+
+        [HttpGet("trainer")]
+        [Authorize(Roles = "Trainer")]
+        public IActionResult GetTrainerActivities()
+        {
+            var trainerId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+            var activityEntities = _sportRepository.GetTrainerActivities(trainerId);
             var results = Mapper.Map<IEnumerable<Model.Activity>>(activityEntities);
 
             return Ok(results);
@@ -44,6 +57,7 @@ namespace Sport.API.Controllers
         }
 
         [HttpPost()]
+        [Authorize(Roles = "Trainer")]
         public IActionResult CreateActivity([FromBody] ActivityForCreationAndUpdate activity)
         {
             if (activity == null)
@@ -52,6 +66,9 @@ namespace Sport.API.Controllers
             }
 
             var finalActivity = Mapper.Map<Entities.Activity>(activity);
+
+            var trainerId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+            finalActivity.TrainerId = trainerId;
 
             _sportRepository.AddActivity(finalActivity);
 
@@ -68,7 +85,8 @@ namespace Sport.API.Controllers
         }
 
         [HttpPut("{activityId}")]
-        public IActionResult UpdatePointOfInterest(int activityId,
+        [Authorize(Roles = "Trainer")]
+        public IActionResult UpdateActivity(int activityId,
             [FromBody] ActivityForCreationAndUpdate activity)
         {
             if (activity == null)
@@ -93,6 +111,7 @@ namespace Sport.API.Controllers
         }
 
         [HttpDelete("{activityId}")]
+        [Authorize(Roles = "Trainer")]
         public IActionResult DeleteActivity(int activityId)
         {
             var activityEntity = _sportRepository.GetActivity(activityId);

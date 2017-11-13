@@ -31,6 +31,11 @@ namespace Sport.API.Services
                 .OrderBy(i => i.Name).ToList();
         }
 
+        public IEnumerable<Activity> GetTrainerActivities(string trainerId)
+        {
+            return _context.Activities.Where(i => i.TrainerId == trainerId).ToList();
+        }
+
         public void AddActivity(Activity activity)
         {
             _context.Activities.Add(activity);
@@ -44,6 +49,17 @@ namespace Sport.API.Services
         public bool Save()
         {
             return (_context.SaveChanges() >= 0);
+        }
+
+        /*IEnumerable<Activity> GetClientActivities(string clientId)
+        {
+            return _context.Activities.Where(i => i.ClientActivities.ClientId == clientId).ToList();
+        }*/
+
+        public void AddClientActivity(int activityId, ClientActivity clientActivity)
+        {
+            var activity = GetActivity(activityId);
+            activity.ClientActivities.Add(clientActivity);
         }
     }
 }

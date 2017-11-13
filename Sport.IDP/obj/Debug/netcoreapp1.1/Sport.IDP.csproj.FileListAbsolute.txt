@@ -1,0 +1,11 @@
+C:\Users\user\source\repos\Sport.API\Sport.IDP\bin\Debug\netcoreapp1.1\Sport.IDP.deps.json
+C:\Users\user\source\repos\Sport.API\Sport.IDP\bin\Debug\netcoreapp1.1\Sport.IDP.runtimeconfig.json
+C:\Users\user\source\repos\Sport.API\Sport.IDP\bin\Debug\netcoreapp1.1\Sport.IDP.runtimeconfig.dev.json
+C:\Users\user\source\repos\Sport.API\Sport.IDP\bin\Debug\netcoreapp1.1\Sport.IDP.dll
+C:\Users\user\source\repos\Sport.API\Sport.IDP\obj\Debug\netcoreapp1.1\Sport.IDP.csprojResolveAssemblyReference.cache
+C:\Users\user\source\repos\Sport.API\Sport.IDP\obj\Debug\netcoreapp1.1\Sport.IDP.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Sport.API\Sport.IDP\obj\Debug\netcoreapp1.1\Sport.IDP.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Sport.API\Sport.IDP\obj\Debug\netcoreapp1.1\Sport.IDP.AssemblyInfo.cs
+C:\Users\user\source\repos\Sport.API\Sport.IDP\bin\Debug\netcoreapp1.1\Sport.IDP.pdb
+C:\Users\user\source\repos\Sport.API\Sport.IDP\obj\Debug\netcoreapp1.1\Sport.IDP.dll
+C:\Users\user\source\repos\Sport.API\Sport.IDP\obj\Debug\netcoreapp1.1\Sport.IDP.pdb

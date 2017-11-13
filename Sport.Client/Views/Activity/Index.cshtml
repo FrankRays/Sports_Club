@@ -7,11 +7,9 @@
     <div class="row">
         <table class="table" style="margin-top:100px; margin-right:40px;">
             <tr>
-                <th>Užsiėmimas</th>
-                <th>Užsiėmimo pradžia</th>
-                <th>Užsiėmimo pabaiga</th>
-                <th>Liko vietų</th>
-                <th>Veiksmai</th>
+                <th>Activity</th>
+                <th>Beginning</th>
+                <th>Ending</th>
             </tr>
             @foreach (var item in Model.Activities)
             {
@@ -19,8 +17,6 @@
                     <td>@item.Name</td>
                     <td>@item.Beginning</td>
                     <td>@item.Ending</td>
-                    <td></td>
-                    <td></td>
                 </tr>
             }
         </table>

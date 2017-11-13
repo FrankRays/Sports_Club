@@ -22,5 +22,11 @@ namespace Sport.API.Entities
 
         [Required]
         public DateTime Ending { get; set; }
+
+        [Required]
+        public string TrainerId { get; set; }
+
+        public ICollection<ClientActivity> ClientActivities { get; set; }
+        = new List<ClientActivity>();
     }
 }

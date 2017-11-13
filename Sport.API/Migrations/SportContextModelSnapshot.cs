@@ -29,9 +29,37 @@ namespace Sport.API.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<string>("TrainerId")
+                        .IsRequired();
+
                     b.HasKey("Id");
 
                     b.ToTable("Activities");
+                });
+
+            modelBuilder.Entity("Sport.API.Entities.ClientActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ActivityId");
+
+                    b.Property<string>("ClientId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("ClientActivities");
+                });
+
+            modelBuilder.Entity("Sport.API.Entities.ClientActivity", b =>
+                {
+                    b.HasOne("Sport.API.Entities.Activity", "Activity")
+                        .WithMany()
+                        .HasForeignKey("ActivityId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
