@@ -10,6 +10,10 @@
                 <th>Activity</th>
                 <th>Beginning</th>
                 <th>Ending</th>
+                @if (User.IsInRole("Client"))
+                {
+                    <th></th>
+                }
             </tr>
             @foreach (var item in Model.Activities)
             {
@@ -17,6 +21,10 @@
                     <td>@item.Name</td>
                     <td>@item.Beginning</td>
                     <td>@item.Ending</td>
+                    @if (User.IsInRole("Client"))
+                    {
+                        <td><a asp-action="AddClientActivity" asp-controller="Activity" asp-route-id="@item.Id">Register</a></td>
+                    }
                 </tr>
             }
         </table>

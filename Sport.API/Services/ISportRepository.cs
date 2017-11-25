@@ -15,7 +15,10 @@ namespace Sport.API.Services
         void AddActivity(Activity activity);
         void DeleteActivity(Activity activity);
         bool Save();
-        //IEnumerable<Activity> GetClientActivities(string clientId);
+        bool ClientActivityExists(string clientId, int activityId);
+        IEnumerable<Activity> GetClientActivities(string clientId);
         void AddClientActivity(int activityId, ClientActivity clientActivity);
+        void DeleteClientActivity(ClientActivity clientActivity);
+        ClientActivity GetClientActivity(int clientActivityId);
     }
 }

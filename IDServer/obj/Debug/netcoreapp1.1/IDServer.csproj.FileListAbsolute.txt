@@ -1,0 +1,11 @@
+C:\Users\user\source\repos\Sport.API\IDServer\bin\Debug\netcoreapp1.1\IDServer.deps.json
+C:\Users\user\source\repos\Sport.API\IDServer\bin\Debug\netcoreapp1.1\IDServer.runtimeconfig.json
+C:\Users\user\source\repos\Sport.API\IDServer\bin\Debug\netcoreapp1.1\IDServer.runtimeconfig.dev.json
+C:\Users\user\source\repos\Sport.API\IDServer\bin\Debug\netcoreapp1.1\IDServer.dll
+C:\Users\user\source\repos\Sport.API\IDServer\bin\Debug\netcoreapp1.1\IDServer.pdb
+C:\Users\user\source\repos\Sport.API\IDServer\obj\Debug\netcoreapp1.1\IDServer.csprojResolveAssemblyReference.cache
+C:\Users\user\source\repos\Sport.API\IDServer\obj\Debug\netcoreapp1.1\IDServer.csproj.CoreCompileInputs.cache
+C:\Users\user\source\repos\Sport.API\IDServer\obj\Debug\netcoreapp1.1\IDServer.AssemblyInfoInputs.cache
+C:\Users\user\source\repos\Sport.API\IDServer\obj\Debug\netcoreapp1.1\IDServer.AssemblyInfo.cs
+C:\Users\user\source\repos\Sport.API\IDServer\obj\Debug\netcoreapp1.1\IDServer.dll
+C:\Users\user\source\repos\Sport.API\IDServer\obj\Debug\netcoreapp1.1\IDServer.pdb

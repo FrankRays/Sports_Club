@@ -19,7 +19,7 @@ namespace Sport.Client.Controllers
     public class ActivityController : Controller
     {
         private readonly ISportHttpClient _sportHttpClient;
-        public string port = "https://localhost:44321/";
+        public string port = "http://localhost:44396/";
 
         public ActivityController(ISportHttpClient sportHttpClient)
         {
@@ -194,6 +194,38 @@ namespace Sport.Client.Controllers
             }
 
             throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
+        }
+
+        /*public IActionResult AddClientActivity(int id)
+        {
+            ViewBag.Title = "Naujas užsiėmimas";
+            return (id, new ClientActivityForCreation());
+        }*/
+
+        //[Authorize(Roles = "Client")]
+
+        public async Task<IActionResult> AddClientActivity(int id)
+        {
+            ClientActivityForCreation model = new ClientActivityForCreation();
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var httpClient = await _sportHttpClient.GetClient();
+
+            var serializedClientActivity = JsonConvert.SerializeObject(model);
+
+            var response = await httpClient.PostAsync(
+                $"{port}/api/activities/{id}/clientactivities",
+                new StringContent(serializedClientActivity, System.Text.Encoding.Unicode, "application/json"))
+                .ConfigureAwait(false);
+
+                return RedirectToAction("Index");
+            
+
+            //throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
         }
     }
 }

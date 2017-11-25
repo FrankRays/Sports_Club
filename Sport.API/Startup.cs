@@ -33,6 +33,15 @@ namespace Sport.API
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll",
+                    builder => builder
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader());
+            });
+
             services.AddMvc();
 
             var connectionString = @"Server=(localdb)\mssqllocaldb;Database=SportDB;Trusted_Connection=True";
@@ -57,14 +66,22 @@ namespace Sport.API
             AutoMapper.Mapper.Initialize(cfg => {
                 cfg.CreateMap<Entities.Activity, Model.Activity>();
                 cfg.CreateMap<Model.ActivityForCreationAndUpdate, Entities.Activity>();
+                cfg.CreateMap<Model.ClientActivityForCreation, Entities.ClientActivity>();
+                cfg.CreateMap<Entities.ClientActivity, Model.ClientActivity>();
             });
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                Authority = "https://localhost:44348/",
-                RequireHttpsMetadata = true,
+                Authority = "http://localhost:5001",
 
-                ApiName = "sportapi"
+                ApiName = "postman_api",
+                AllowedScopes = {"postman_api"},
+
+                RequireHttpsMetadata = false
+                /*Authority = "http://localhost:44348/",
+                RequireHttpsMetadata = false,
+
+                ApiName = "sportapi"*/
             });
 
             app.UseMvc();

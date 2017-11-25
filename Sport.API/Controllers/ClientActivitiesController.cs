@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Sport.API.Controllers
 {
     [Route("api/activities")]
-    //[Authorize]
+    [Authorize]
     public class ClientActivitiesController : Controller
     {
         private ISportRepository _sportRepository;
@@ -21,8 +21,23 @@ namespace Sport.API.Controllers
             _sportRepository = sportRepository;
         }
 
+        [HttpGet("clientactivities/{clientActivityId}", Name = "GetClientActivity")]
+        public IActionResult GetClientActivity(int clientActivityId)
+        {
+            var activity = _sportRepository.GetClientActivity(clientActivityId);
+
+            if (activity == null)
+            {
+                return NotFound();
+            }
+
+            var activityResult = Mapper.Map<Model.ClientActivity>(activity);
+            return Ok(activityResult);
+        }
+
         [HttpPost("{activityId}/clientactivities")]
-        public IActionResult CreatePointOfInterest(int activityId,
+        [Authorize(Roles = "Client")]
+        public IActionResult CreateClientActivity(int activityId,
             [FromBody] ClientActivityForCreation clientActivity)
         {
             if (clientActivity == null)
@@ -40,17 +55,15 @@ namespace Sport.API.Controllers
                 return NotFound();
             }
 
-            /*var maxPointOfInterestId = CitiesDataStore.Current.Cities.SelectMany(
-                c => c.PointsOfInterest).Max(p => p.Id);
+            var clientId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
 
-            var finalPointOfInterest = new PointOfInterestDto()
+            if(_sportRepository.ClientActivityExists(clientId, activityId))
             {
-                Id = ++maxPointOfInterestId,
-                Name = pointOfInterest.Name,
-                Description = pointOfInterest.Description
-            };*/
+                return BadRequest("This user has already registered to this activity");
+            }
 
             var finalClientActivity = Mapper.Map<Entities.ClientActivity>(clientActivity);
+            finalClientActivity.ClientId = clientId;
 
             _sportRepository.AddClientActivity(activityId, finalClientActivity);
 
@@ -62,7 +75,34 @@ namespace Sport.API.Controllers
             var createdClientActivityToReturn = Mapper.Map<Model.ClientActivity>(finalClientActivity);
 
             return CreatedAtRoute("GetClientActivity", new
-            { cityId = activityId, id = createdClientActivityToReturn.Id }, createdClientActivityToReturn);
+            { /*ActivityId = activityId,*/ id = createdClientActivityToReturn.Id }, createdClientActivityToReturn);
+        }
+
+        [HttpDelete("{activityId}/clientactivities/{clientActivityId}")]
+        [Authorize(Roles = "Client")]
+        public IActionResult DeleteClientActivity(int clientActivityId)
+        {
+            var clientActivityEntity = _sportRepository.GetClientActivity(clientActivityId);
+            var clientId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+
+            if (!(clientId == clientActivityEntity.ClientId))
+            {
+                return Unauthorized();
+            }
+
+            if (clientActivityEntity == null)
+            {
+                return NotFound();
+            }
+
+            _sportRepository.DeleteClientActivity(clientActivityEntity);
+
+            if (!_sportRepository.Save())
+            {
+                return StatusCode(500, "A problem happened while handling your request.");
+            }
+
+            return NoContent();
         }
     }
 }

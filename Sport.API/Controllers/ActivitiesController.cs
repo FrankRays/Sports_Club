@@ -100,6 +100,12 @@ namespace Sport.API.Controllers
                 return NotFound();
             }
 
+            var trainerId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+            if (!(trainerId == activityEntity.TrainerId))
+            {
+                return Unauthorized();
+            }
+
             Mapper.Map(activity, activityEntity);
 
             if (!_sportRepository.Save())
@@ -111,7 +117,7 @@ namespace Sport.API.Controllers
         }
 
         [HttpDelete("{activityId}")]
-        [Authorize(Roles = "Trainer")]
+        //[Authorize(Roles = "Trainer")]
         public IActionResult DeleteActivity(int activityId)
         {
             var activityEntity = _sportRepository.GetActivity(activityId);
@@ -119,6 +125,17 @@ namespace Sport.API.Controllers
             if (activityEntity == null)
             {
                 return NotFound();
+            }
+
+            if (!User.IsInRole("Trainer"))
+            {
+                return StatusCode(403);
+            }
+
+            var trainerId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+            if (!(trainerId == activityEntity.TrainerId))
+            {
+                return Unauthorized();
             }
 
             _sportRepository.DeleteActivity(activityEntity);
@@ -129,6 +146,17 @@ namespace Sport.API.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("clientactivities")]
+        [Authorize(Roles = "Client")]
+        public IActionResult GetClientActivities()
+        {
+            var clientId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+            var activityEntities = _sportRepository.GetClientActivities(clientId);
+            var results = Mapper.Map<IEnumerable<Model.Activity>>(activityEntities);
+
+            return Ok(results);
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Sport.IDP
                 {
                     ClientName = "Gym Information System",
                     ClientId = "sportclient",
-                    AllowedGrantTypes = GrantTypes.Hybrid,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     //RequireConsent = false,
                     RedirectUris = new List<string>()
                     {
