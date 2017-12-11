@@ -19,7 +19,7 @@ namespace Sport.Client.Controllers
     public class ActivityController : Controller
     {
         private readonly ISportHttpClient _sportHttpClient;
-        public string port = "http://localhost:44396/";
+        public string port = "https://localhost:44354/";
 
         public ActivityController(ISportHttpClient sportHttpClient)
         {
@@ -51,7 +51,7 @@ namespace Sport.Client.Controllers
             throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
         }
 
-        public IActionResult AddActivity()
+        public IActionResult OpenAddActivity()
         {
             ViewBag.Title = "Naujas užsiėmimas";
             return View(new ActivityForCreationAndUpdate());
@@ -61,6 +61,7 @@ namespace Sport.Client.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddActivity(ActivityForCreationAndUpdate model)
         {
+
             if (!ModelState.IsValid)
             {
                 return View();
@@ -155,6 +156,20 @@ namespace Sport.Client.Controllers
             throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
         }
 
+        public async Task<IActionResult> DeleteClientActivity(int id)
+        {
+            var httpClient = await _sportHttpClient.GetClient();
+
+            var response = await httpClient.DeleteAsync($"{port}/api/activities/{id}/clientactivities").ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("GetClientActivities");
+            }
+
+            throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
+        }
+
         public async Task Logout()
         {
             await HttpContext.Authentication.SignOutAsync("Cookies");
@@ -196,6 +211,25 @@ namespace Sport.Client.Controllers
             throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
         }
 
+        [Authorize(Roles = "Client")]
+        public async Task<IActionResult> GetClientActivities()
+        {
+            var httpClient = await _sportHttpClient.GetClient();
+            var response = await httpClient.GetAsync($"{port}/api/activities/clientactivities").ConfigureAwait(false);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var activitiesAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                var sportIndexViewModel = new SportIndexViewModel(
+                JsonConvert.DeserializeObject<IList<Activity>>(activitiesAsString).ToList());
+
+                return View(sportIndexViewModel);
+            }
+
+            throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");
+        }
+
         /*public IActionResult AddClientActivity(int id)
         {
             ViewBag.Title = "Naujas užsiėmimas";
@@ -222,7 +256,7 @@ namespace Sport.Client.Controllers
                 new StringContent(serializedClientActivity, System.Text.Encoding.Unicode, "application/json"))
                 .ConfigureAwait(false);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("GetClientActivities");
             
 
             //throw new Exception($"A problem happened while calling the API: {response.ReasonPhrase}");

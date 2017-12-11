@@ -78,12 +78,25 @@ namespace Sport.API.Controllers
             { /*ActivityId = activityId,*/ id = createdClientActivityToReturn.Id }, createdClientActivityToReturn);
         }
 
-        [HttpDelete("{activityId}/clientactivities/{clientActivityId}")]
+        //[HttpDelete("{activityId}/clientactivities/{clientActivityId}")]
+        [HttpDelete("{activityId}/clientactivities")]
         [Authorize(Roles = "Client")]
-        public IActionResult DeleteClientActivity(int clientActivityId)
+        public IActionResult DeleteClientActivity(int activityId /*int clientActivityId*/)
         {
-            var clientActivityEntity = _sportRepository.GetClientActivity(clientActivityId);
+            var ActivityEntity = _sportRepository.GetActivity(activityId);
+            IEnumerable<Entities.ClientActivity> ClientActivities = ActivityEntity.ClientActivities;
+
             var clientId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
+            var clientActivityEntity = new Entities.ClientActivity();
+
+            foreach (var item in ClientActivities)
+            {
+                if (item.ClientId == clientId)
+                    clientActivityEntity = _sportRepository.GetClientActivity(item.Id);
+            }
+
+            //var clientActivityEntity = _sportRepository.GetClientActivity(clientActivityId);
+            //var clientId = User.Claims.FirstOrDefault(c => c.Type == "sub").Value;
 
             if (!(clientId == clientActivityEntity.ClientId))
             {

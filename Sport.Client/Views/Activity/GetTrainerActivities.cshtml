@@ -1,11 +1,35 @@
 ﻿@model Sport.Client.ViewModels.SportIndexViewModel
 
+
+
 <div class="bottomMarginDefault">
 </div>
 
-<div class="container">
+<div class="container"  style="margin-top:100px; margin-right:40px;">
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Information</h4>
+                </div>
+                <div class="modal-body">
+                    <p>On this page you can only see activities that you have created.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row" style="display: inline-flex"><h3>Your activities</h3><a href="#myModal" data-toggle="modal" data-target="#myModal"><img src="~/images/information.svg" style="width: 23px; height: 23px;"></a></div>
     <div class="row">
-        <table class="table" style="margin-top:100px; margin-right:40px;">
+        <table class="table">
             <tr>
                 <th>Activity</th>
                 <th>Beginning</th>
@@ -17,9 +41,8 @@
             {
                 <tr>
                     <td>@item.Name</td>
-                    <td>@item.Beginning</td>
-                    <td>@item.Ending</td>
-                    <td></td>
+                    <td>@item.Beginning.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@item.Ending.ToString("yyyy/MM/dd HH:mm")</td>
                     <td><a asp-action="EditActivity" asp-controller="Activity" asp-route-id="@item.Id">Edit</a></td>
                     <td><a asp-action="DeleteActivity" asp-controller="Activity" asp-route-id="@item.Id">Delete</a></td>
                 </tr>

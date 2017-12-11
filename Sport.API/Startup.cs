@@ -72,16 +72,16 @@ namespace Sport.API
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                Authority = "http://localhost:5001",
+                /*Authority = "http://localhost:5001",
 
                 ApiName = "postman_api",
                 AllowedScopes = {"postman_api"},
 
-                RequireHttpsMetadata = false
-                /*Authority = "http://localhost:44348/",
-                RequireHttpsMetadata = false,
+                RequireHttpsMetadata = false*/
+                Authority = "https://localhost:44382/",
+                RequireHttpsMetadata = true,
 
-                ApiName = "sportapi"*/
+                ApiName = "sportapi"
             });
 
             app.UseMvc();

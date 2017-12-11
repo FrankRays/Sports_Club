@@ -61,8 +61,8 @@ namespace Sport.Client
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
-                Authority = "http://localhost:44348/",
-                RequireHttpsMetadata = false,
+                Authority = "https://localhost:44382/",
+                RequireHttpsMetadata = true,
                 ClientId = "sportclient",
                 Scope = { "openid", "profile", "roles", "sportapi" },
                 ResponseType = "code id_token",

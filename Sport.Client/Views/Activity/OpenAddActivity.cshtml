@@ -1,8 +1,8 @@
 ﻿@using Sport.Model
-@model Activity
 
+@model ActivityForCreationAndUpdate
 <div class="container">
-    <form asp-action="EditActivity" style="margin-top:100px;">
+    <form asp-action="AddActivity" style="margin-top:100px;">
         <div class="row form-group">
             <div class="col-md-2 col-md-offset-2">
                 <div>Name of activity</div>
@@ -29,7 +29,7 @@
         </div>
         <div class="row">
             <div class="col-md-2 col-md-offset-4">
-                <button type="submit" class="btn btn-primary">Edit</button>
+                <button type="submit" class="btn btn-primary">Add</button>
             </div>
         </div>
     </form>

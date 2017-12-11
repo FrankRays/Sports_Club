@@ -1,0 +1,29 @@
+﻿@model Sport.Client.ViewModels.SportIndexViewModel
+
+<div class="bottomMarginDefault">
+</div>
+
+<div class="container" style="margin-top:100px; margin-right:40px;">
+    <h3>Your activities</h3>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Activity</th>
+                <th>Beginning</th>
+                <th>Ending</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Activities)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Beginning.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td>@item.Ending.ToString("yyyy/MM/dd HH:mm")</td>
+                    <td></td>
+                    <td><a asp-action="DeleteClientActivity" asp-controller="Activity" asp-route-id="@item.Id">Check out</a></td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

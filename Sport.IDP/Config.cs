@@ -71,11 +71,11 @@ namespace Sport.IDP
                 {
                     ClientName = "Gym Information System",
                     ClientId = "sportclient",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    //RequireConsent = false,
+                     AllowedGrantTypes = GrantTypes.Hybrid,
+                    RequireConsent = false,
                     RedirectUris = new List<string>()
                     {
-                        "https://localhost:44302/signin-oidc"
+                        "https://localhost:44391/signin-oidc"
                     },
                     AllowedScopes =
                     {
@@ -90,7 +90,7 @@ namespace Sport.IDP
                     },
                     PostLogoutRedirectUris =
                     {
-                        "https://localhost:44302/signout-callback-oidc"
+                        "https://localhost:44391/signout-callback-oidc"
                     }
                     //AlwaysIncludeUserClaimsInIdToken = true
                 }
